@@ -54,7 +54,7 @@ def setup_embedded_environment():
     os.environ["USE_BYO_LLM"] = "True"  # Re-enabled with proper Deepgram BYO LLM format
     
     # Voice configuration
-    os.environ["AGENT_VOICE_NAME"] = "Cheyenne-PlayAI"
+    os.environ["AGENT_VOICE_NAME"] = "aura-2-cora-en"
     
     # Audio configuration  
     os.environ["DG_START_THRESHOLD"] = "24"

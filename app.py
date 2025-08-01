@@ -224,56 +224,92 @@ def test_audio(input_device, output_device):
 
 # Step 3: Voice picker (choices list only – actual components are created inside the layout)
 voices = [
-    {"name": "Arista-PlayAI"},
-    {"name": "Atlas-PlayAI"},
-    {"name": "Basil-PlayAI"},
-    {"name": "Briggs-PlayAI"},
-    {"name": "Calum-PlayAI"},
-    {"name": "Celeste-PlayAI"},
-    {"name": "Cheyenne-PlayAI"},
-    {"name": "Chip-PlayAI"},
-    {"name": "Cillian-PlayAI"},
-    {"name": "Deedee-PlayAI"},
-    {"name": "Fritz-PlayAI"},
-    {"name": "Gail-PlayAI"},
-    {"name": "Indigo-PlayAI"},
-    {"name": "Mamaw-PlayAI"},
-    {"name": "Mason-PlayAI"},
-    {"name": "Mikail-PlayAI"},
-    {"name": "Mitch-PlayAI"},
-    {"name": "Quinn-PlayAI"},
-    {"name": "Thunder-PlayAI"},
+    {"name": "aura-2-amalthea-en", "gender": "Female", "characteristics": "Engaging, Natural, Cheerful"},
+    {"name": "aura-2-andromeda-en", "gender": "Female", "characteristics": "Casual, Expressive, Comfortable"},
+    {"name": "aura-2-apollo-en", "gender": "Male", "characteristics": "Confident, Comfortable, Casual"},
+    {"name": "aura-2-arcas-en", "gender": "Male", "characteristics": "Natural, Smooth, Clear, Comfortable"},
+    {"name": "aura-2-aries-en", "gender": "Male", "characteristics": "Warm, Energetic, Caring"},
+    {"name": "aura-2-asteria-en", "gender": "Female", "characteristics": "Clear, Confident, Knowledgeable, Energetic"},
+    {"name": "aura-2-athena-en", "gender": "Female", "characteristics": "Calm, Smooth, Professional"},
+    {"name": "aura-2-atlas-en", "gender": "Male", "characteristics": "Enthusiastic, Confident, Approachable, Friendly"},
+    {"name": "aura-2-aurora-en", "gender": "Female", "characteristics": "Cheerful, Expressive, Energetic"},
+    {"name": "aura-2-callista-en", "gender": "Female", "characteristics": "Clear, Energetic, Professional, Smooth"},
+    {"name": "aura-2-cora-en", "gender": "Female", "characteristics": "Smooth, Melodic, Caring"},
+    {"name": "aura-2-cordelia-en", "gender": "Female", "characteristics": "Approachable, Warm, Polite"},
+    {"name": "aura-2-delia-en", "gender": "Female", "characteristics": "Casual, Friendly, Cheerful, Breathy"},
+    {"name": "aura-2-draco-en", "gender": "Male", "characteristics": "Warm, Approachable, Trustworthy, Baritone"},
+    {"name": "aura-2-electra-en", "gender": "Female", "characteristics": "Professional, Engaging, Knowledgeable"},
+    {"name": "aura-2-harmonia-en", "gender": "Female", "characteristics": "Empathetic, Clear, Calm, Confident"},
+    {"name": "aura-2-helena-en", "gender": "Female", "characteristics": "Caring, Natural, Positive, Friendly, Raspy"},
+    {"name": "aura-2-hera-en", "gender": "Female", "characteristics": "Smooth, Warm, Professional"},
+    {"name": "aura-2-hermes-en", "gender": "Male", "characteristics": "Expressive, Engaging, Professional"},
+    {"name": "aura-2-hyperion-en", "gender": "Male", "characteristics": "Caring, Warm, Empathetic"},
+    {"name": "aura-2-iris-en", "gender": "Female", "characteristics": "Cheerful, Positive, Approachable"},
+    {"name": "aura-2-janus-en", "gender": "Female", "characteristics": "Southern, Smooth, Trustworthy"},
+    {"name": "aura-2-juno-en", "gender": "Female", "characteristics": "Natural, Engaging, Melodic, Breathy"},
+    {"name": "aura-2-jupiter-en", "gender": "Male", "characteristics": "Expressive, Knowledgeable, Baritone"},
+    {"name": "aura-2-luna-en", "gender": "Female", "characteristics": "Friendly, Natural, Engaging"},
+    {"name": "aura-2-mars-en", "gender": "Male", "characteristics": "Smooth, Patient, Trustworthy, Baritone"},
+    {"name": "aura-2-minerva-en", "gender": "Female", "characteristics": "Positive, Friendly, Natural"},
+    {"name": "aura-2-neptune-en", "gender": "Male", "characteristics": "Professional, Patient, Polite"},
+    {"name": "aura-2-odysseus-en", "gender": "Male", "characteristics": "Calm, Smooth, Comfortable, Professional"},
+    {"name": "aura-2-ophelia-en", "gender": "Female", "characteristics": "Expressive, Enthusiastic, Cheerful"},
+    {"name": "aura-2-orion-en", "gender": "Male", "characteristics": "Approachable, Comfortable, Calm, Polite"},
+    {"name": "aura-2-orpheus-en", "gender": "Male", "characteristics": "Professional, Clear, Confident, Trustworthy"},
+    {"name": "aura-2-pandora-en", "gender": "Female", "characteristics": "Smooth, Calm, Melodic, Breathy"},
+    {"name": "aura-2-phoebe-en", "gender": "Female", "characteristics": "Energetic, Warm, Casual"},
+    {"name": "aura-2-pluto-en", "gender": "Male", "characteristics": "Smooth, Calm, Empathetic, Baritone"},
+    {"name": "aura-2-saturn-en", "gender": "Male", "characteristics": "Knowledgeable, Confident, Baritone"},
+    {"name": "aura-2-selene-en", "gender": "Female", "characteristics": "Expressive, Engaging, Energetic"},
+    {"name": "aura-2-thalia-en", "gender": "Female", "characteristics": "Clear, Confident, Energetic, Enthusiastic"},
+    {"name": "aura-2-theia-en", "gender": "Female", "characteristics": "Expressive, Polite, Sincere"},
+    {"name": "aura-2-vesta-en", "gender": "Female", "characteristics": "Natural, Expressive, Patient, Empathetic"},
+    {"name": "aura-2-zeus-en", "gender": "Male", "characteristics": "Deep, Trustworthy, Smooth"},
 ]
 
 # Default voice is now Cora
-DEFAULT_VOICE = "Cheyenne-PlayAI"
+DEFAULT_VOICE = "aura-2-cora-en"
 
 # Helper to turn model name like "aura-2-thalia-en" into "Thalia"
 def display_name(model_name: str) -> str:
-    """Nicely format a PlayAI voice name."""
-    if model_name.endswith("-PlayAI"):
-        return model_name.replace("-PlayAI", "")
-    return model_name
+    try:
+        return model_name.split("-")[-2].title()
+    except Exception:
+        return model_name
 
 def update_voice_details(selected):
     for v in voices:
         if v["name"] == selected:
-            details = display_name(v["name"])
+            details = f"{display_name(v['name'])} - {v['gender']} - {v['characteristics']}"
             return details, None  # preview audio set via button
     return "", None
 
 def play_preview(voice):
-    """Generate a short Groq Play-AI TTS sample for the selected voice."""
-    import io, numpy as np, soundfile as sf
-    from groq_tts import synthesize_speech
+    """Generate a short Deepgram TTS sample for the selected voice."""
+    import requests, io, numpy as np, soundfile as sf, os
+
+    api_key = os.getenv("DEEPGRAM_API_KEY")
+    if not api_key:
+        print("DEEPGRAM_API_KEY not set – cannot generate preview")
+        return None
 
     try:
-        wav_bytes = synthesize_speech(
-            "Hello, I am the selected Remember voice agent.",
-            voice=voice,
-        )
-        buffer = io.BytesIO(wav_bytes)
-        audio_np, sr = sf.read(buffer, dtype="int16")
+        tts_url = "https://api.deepgram.com/v1/speak"
+        params = {
+            "model": voice,
+            "encoding": "linear16",
+            "sample_rate": "48000",
+        }
+        payload = {"text": "Hello, I am the selected Remember voice agent."}
+        headers = {
+            "Authorization": f"Token {api_key}",
+            "Content-Type": "application/json",
+        }
+        resp = requests.post(tts_url, params=params, headers=headers, json=payload, timeout=15)
+        resp.raise_for_status()
+
+        wav_bytes = io.BytesIO(resp.content)
+        audio_np, sr = sf.read(wav_bytes, dtype="int16")
         return (sr, audio_np)
     except Exception as e:
         print(f"Preview generation failed: {e}")
@@ -484,7 +520,7 @@ with gr.Blocks(title="Re:MEMBER AI Voice Agent Demo", theme=gr.themes.Soft(prima
                 # Dropdown now shows full voice details (Name - Gender - Characteristics)
                 voice_dropdown = gr.Dropdown(
                     choices=[(
-                        display_name(v['name']),
+                        f"{display_name(v['name'])} - {v['gender']} - {v['characteristics']}",
                         v['name']
                     ) for v in voices],
                     label="Select Agent Voice",

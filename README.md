@@ -1,6 +1,6 @@
 # Re:MEMBER AI Voice Agent
 
-A powerful AI voice agent using Groq Play-AI voices with support for BYO (Bring Your Own) LLM integration. Features ultra-fast voice conversations with real-time STT, LLM, and TTS processing for natural interactions.
+A powerful AI voice agent using Deepgram's Voice Agent API with support for BYO (Bring Your Own) LLM integration. Features ultra-fast voice conversations with real-time STT, LLM, and TTS processing for natural interactions.
 
 ## Key Features
 
