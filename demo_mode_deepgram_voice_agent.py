@@ -251,9 +251,9 @@ class DeepgramVoiceAgentPipeline:
             options.agent.think.provider.model = "gpt-4o-mini"
             options.agent.think.provider.temperature = 0.7
             
-            # TTS configuration (Deepgram Aura)
-            options.agent.speak.provider.type = "deepgram"
-            voice_name = os.getenv("AGENT_VOICE_NAME", "aura-2-thalia-en")
+            # TTS configuration using Groq Play-AI
+            options.agent.speak.provider.type = "open_ai"
+            voice_name = os.getenv("AGENT_VOICE_NAME", "Cheyenne-PlayAI")
             options.agent.speak.provider.model = voice_name
             
             # Normal playback speed; artefacts are avoided once prompt is correct
@@ -982,30 +982,19 @@ async def run_voice_agent(user_pcm: bytes) -> tuple[str, bytes]:
         reply_text = "Sorry, I had trouble thinking of a reply."
         print(f"Groq completion failed: {exc}")
 
-    # 4) Text-to-Speech with Deepgram Aura-2 -----------------------------------
+    # 4) Text-to-Speech with Groq Play-AI --------------------------------------
     try:
-        tts_url = "https://api.deepgram.com/v1/speak"
-        # Use the same voice model as the real-time pipeline for consistency
-        params = {
-            "model": os.getenv("AGENT_VOICE_NAME", "aura-2-thalia-en"),
-            "encoding": "linear16",
-            "sample_rate": "48000"
-        }
-        headers = {
-            "Authorization": f"Token {DEEPGRAM_API_KEY}",
-            "Content-Type": "application/json"
-        }
-        tts_payload = {"text": reply_text}
-        loop = asyncio.get_event_loop()
-        # Run blocking request in a thread so we don't block the event loop
-        def _blocking_tts():
-            resp = _requests.post(tts_url, params=params, headers=headers, json=tts_payload)
-            resp.raise_for_status()
-            return resp.content
-        reply_pcm = await loop.run_in_executor(None, _blocking_tts)
+        from groq_tts import synthesize_speech
+        wav_bytes = synthesize_speech(
+            reply_text,
+            voice=os.getenv("AGENT_VOICE_NAME", "Cheyenne-PlayAI"),
+        )
+        import soundfile as sf, io
+        pcm_np, _ = sf.read(io.BytesIO(wav_bytes), dtype="int16")
+        reply_pcm = pcm_np.tobytes()
     except Exception as exc:
-        reply_pcm = b""  # empty audio
-        print(f"Deepgram TTS failed: {exc}")
+        reply_pcm = b""
+        print(f"Groq TTS failed: {exc}")
 
     return reply_text, reply_pcm
 
