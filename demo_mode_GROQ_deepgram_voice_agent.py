@@ -654,7 +654,7 @@ class DeepgramVoiceAgentPipeline:
                 try:
                     # Correct BYO LLM configuration using dictionary syntax
                     # Provider configuration (using dictionary access)
-                    options.agent.think.provider["type"] = "open_ai"
+                    options.agent.think.provider["type"] = "openai"
                     options.agent.think.provider["model"] = LLMConfig.MODEL_NAME
                     options.agent.think.provider["temperature"] = LLMConfig.TEMPERATURE
                     
@@ -671,7 +671,7 @@ class DeepgramVoiceAgentPipeline:
                     print(f"  ❌ BYO LLM configuration failed: {e1}")
                     print("  ⚠️ Falling back to standard Deepgram LLM")
                     # Force fallback to standard LLM configuration using dictionary syntax
-                    options.agent.think.provider["type"] = "open_ai"
+                    options.agent.think.provider["type"] = "openai"
                     options.agent.think.provider["model"] = LLMConfig.DEEPGRAM_LLM_MODEL
                     options.agent.think.provider["temperature"] = LLMConfig.TEMPERATURE
                     print("  ✅ Standard LLM fallback configured")
@@ -679,19 +679,19 @@ class DeepgramVoiceAgentPipeline:
             else:
                 print("Using standard Deepgram LLM...")
                 try:
-                    options.agent.think.provider["type"] = "open_ai"  # Deepgram's default
+                    options.agent.think.provider["type"] = "openai"  # Deepgram's default
                     options.agent.think.provider["model"] = LLMConfig.DEEPGRAM_LLM_MODEL
                     options.agent.think.provider["temperature"] = LLMConfig.TEMPERATURE
                     print(f"  ✅ Standard LLM configured: {LLMConfig.DEEPGRAM_LLM_MODEL}")
                 except Exception as e:
                     print(f"  ❌ Error configuring standard LLM: {e}")
                     # Ultimate fallback - minimal configuration
-                    options.agent.think.provider["type"] = "open_ai"
+                    options.agent.think.provider["type"] = "openai"
                     options.agent.think.provider["model"] = "gpt-4o-mini"
                     print("  ✅ Using minimal fallback LLM configuration")
             
             # TTS configuration now uses Groq Play-AI
-            options.agent.speak.provider.type = "open_ai"
+            options.agent.speak.provider.type = "openai"
             voice_name = os.getenv("AGENT_VOICE_NAME", "Cheyenne-PlayAI")
             options.agent.speak.provider.model = voice_name
             
