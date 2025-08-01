@@ -1,0 +1,98 @@
+name: VAD Regression Tests
+
+on:
+  pull_request:
+    branches: [ main, master ]
+    paths: 
+      - 'demo_mode_groq_pure_voice.py'
+      - 'test_vad_regression.py'
+      - '.github/workflows/vad-regression.yml'
+  push:
+    branches: [ main, master ]
+    paths: 
+      - 'demo_mode_groq_pure_voice.py'
+      - 'test_vad_regression.py'
+
+jobs:
+  vad-regression-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🔍 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install numpy webrtcvad sounddevice pydub groq structlog python-dotenv asyncio
+        
+    - name: 🎧 Install system audio dependencies (Linux)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libasound2-dev portaudio19-dev
+        
+    - name: 🧪 Run VAD regression tests
+      env:
+        # Set environment variables for consistent testing
+        VAD_STRICTNESS: "3"
+        VAD_WEBRTC_SENSITIVITY: "1" 
+        VAD_NOISE_MULTIPLIER: "1.0"
+        VAD_DEBUG: "false"
+        GROQ_API_KEY: "dummy"  # Tests don't need real API key
+      run: |
+        echo "🔬 Running VAD regression test suite..."
+        python run_vad_tests.py
+        
+    - name: 📊 Upload test results (on failure)
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: vad-test-results
+        path: |
+          vad_baseline_metrics.json
+          *.log
+        retention-days: 30
+        
+    - name: 💬 Comment on PR (on failure)
+      if: failure() && github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `❌ **VAD Regression Tests Failed**
+            
+            The Voice Activity Detection accuracy has degraded with these changes.
+            
+            🚨 **Action Required:** 
+            - Review VAD-related changes in this PR
+            - Check if new code affects voice detection accuracy
+            - Run tests locally: \`python run_vad_tests.py\`
+            - Fix issues before merging
+            
+            💡 **If this is an intentional VAD improvement:**
+            Run \`python run_vad_tests.py --save-baseline\` to update baseline metrics.`
+          })
+          
+    - name: ✅ Comment on PR (on success)
+      if: success() && github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `✅ **VAD Regression Tests Passed**
+            
+            Voice Activity Detection accuracy is maintained! 🛡️
+            
+            🚀 Safe to merge - no VAD performance degradation detected.`
+          }) 

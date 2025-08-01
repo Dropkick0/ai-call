@@ -1,0 +1,62 @@
+{
+  "test_timestamp": "2025-06-26T10:16:33.416008",
+  "test_audio_file": "Audio Input Test.mp3",
+  "results": {
+    "openai_realtime": {
+      "pipeline_name": "OpenAI Realtime API (Shimmer)",
+      "total_latency": null,
+      "transcription_time": null,
+      "llm_response_time": null,
+      "tts_generation_time": null,
+      "transcribed_text": null,
+      "llm_response": null,
+      "output_audio_file": null,
+      "error": "BaseEventLoop.create_connection() got an unexpected keyword argument 'extra_headers'",
+      "timestamp": "2025-06-26T10:16:33.416008"
+    },
+    "openai_chain": {
+      "pipeline_name": "OpenAI Chain (GPT-4o-transcribe \u2192 GPT-4.1 \u2192 GPT-4o-mini-TTS)",
+      "total_latency": 5.903968811035156,
+      "transcription_time": 1.6762571334838867,
+      "llm_response_time": 2.3044822216033936,
+      "tts_generation_time": 1.8251373767852783,
+      "transcribed_text": "A single rose can be my garden, a single friend my world.",
+      "llm_response": "That's a beautiful quote there! It seems like you value relationships deeply. Who's the friend or loved one that comes to mind when you think of this quote?",
+      "output_audio_file": "test_results/openai_chain_output.mp3",
+      "error": null,
+      "timestamp": "2025-06-26T10:16:33.416008"
+    },
+    "groq_playai": {
+      "pipeline_name": "GROQ + PlayAI (Whisper \u2192 Llama-3.3 \u2192 PlayAI-TTS Celeste)",
+      "total_latency": 2.2069544792175293,
+      "transcription_time": 0.44750094413757324,
+      "llm_response_time": 0.25331926345825195,
+      "tts_generation_time": 1.506134271621704,
+      "transcribed_text": " A single rose can be my garden, a single friend my world.",
+      "llm_response": "I love that quote. It's all about perspective and appreciating the little things in life. What makes that quote resonate with you today?",
+      "output_audio_file": "test_results/groq_playai_output.mp3",
+      "error": null,
+      "timestamp": "2025-06-26T10:16:33.416008"
+    },
+    "groq_elevenlabs": {
+      "pipeline_name": "GROQ + ElevenLabs (Whisper \u2192 Llama-3.3 \u2192 ElevenLabs River)",
+      "total_latency": 3.079368829727173,
+      "transcription_time": 0.4585137367248535,
+      "llm_response_time": 0.29367828369140625,
+      "tts_generation_time": 2.231670618057251,
+      "transcribed_text": " A single rose can be my garden, a single friend my world.",
+      "llm_response": "I love that quote. It's so true, isn't it? Sometimes it's the small, simple things in life that bring us the most joy. What's the story behind why that quote resonates with you?",
+      "output_audio_file": "test_results/groq_elevenlabs_output.mp3",
+      "error": null,
+      "timestamp": "2025-06-26T10:16:33.416008"
+    }
+  },
+  "summary": {
+    "total_tests": 4,
+    "successful_tests": 3,
+    "failed_tests": 1,
+    "average_latency": 3.7300973733266196,
+    "fastest_pipeline": "GROQ + PlayAI (Whisper \u2192 Llama-3.3 \u2192 PlayAI-TTS Celeste)",
+    "slowest_pipeline": "OpenAI Chain (GPT-4o-transcribe \u2192 GPT-4.1 \u2192 GPT-4o-mini-TTS)"
+  }
+}
