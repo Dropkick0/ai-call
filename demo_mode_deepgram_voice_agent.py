@@ -247,12 +247,12 @@ class DeepgramVoiceAgentPipeline:
                     pass
             
             # LLM configuration (we'll inject strategic context)
-            options.agent.think.provider.type = "openai"  # Deepgram supports OpenAI-compatible APIs
+            options.agent.think.provider.type = "open_ai"  # Deepgram supports OpenAI-compatible APIs
             options.agent.think.provider.model = "gpt-4o-mini"
             options.agent.think.provider.temperature = 0.7
             
             # TTS configuration using Groq Play-AI
-            options.agent.speak.provider.type = "openai"
+            options.agent.speak.provider.type = "open_ai"
             voice_name = os.getenv("AGENT_VOICE_NAME", "Cheyenne-PlayAI")
             options.agent.speak.provider.model = voice_name
             

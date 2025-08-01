@@ -27,6 +27,4 @@ def synthesize_speech(text: str, voice: str = TTSConfig.VOICE_NAME,
         input=text,
         response_format=response_format,
     )
-    # `BinaryAPIResponse` does not expose a `content` attribute. Use `read()`
-    # to obtain the binary audio bytes from the response object.
-    return response.read()
+    return response.content
