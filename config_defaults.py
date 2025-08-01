@@ -420,7 +420,7 @@ class TTSConfig:
     
     # GROQ TTS settings
     MODEL_NAME = "playai-tts"              # GROQ's TTS model
-    VOICE_NAME = "Cheyenne-PlayAI"         # Default PlayAI voice
+    VOICE_NAME = "Fritz-PlayAI"            # Professional male voice
     RESPONSE_FORMAT = "wav"                # Audio format
     
     # Playback settings

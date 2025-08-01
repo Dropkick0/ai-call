@@ -32,7 +32,7 @@ GROQ_API_KEY=your_groq_api_key_here
 USE_BYO_LLM=true  # Set to false for Deepgram's standard LLM
 
 # Voice Configuration
-AGENT_VOICE_NAME=Cheyenne-PlayAI
+AGENT_VOICE_NAME=aura-2-thalia-en
 AGENT_PROMPT_PATH=prompts/system_prompt.txt
 
 # Audio Configuration (optional)
@@ -89,26 +89,11 @@ python main.py
 
 ## Available Voice Models
 
-The agent now supports Groq Play-AI voices:
-- `Arista-PlayAI`
-- `Atlas-PlayAI`
-- `Basil-PlayAI`
-- `Briggs-PlayAI`
-- `Calum-PlayAI`
-- `Celeste-PlayAI`
-- `Cheyenne-PlayAI` *(default)*
-- `Chip-PlayAI`
-- `Cillian-PlayAI`
-- `Deedee-PlayAI`
-- `Fritz-PlayAI`
-- `Gail-PlayAI`
-- `Indigo-PlayAI`
-- `Mamaw-PlayAI`
-- `Mason-PlayAI`
-- `Mikail-PlayAI`
-- `Mitch-PlayAI`
-- `Quinn-PlayAI`
-- `Thunder-PlayAI`
+The agent supports all Deepgram Aura-2 voices:
+- `aura-2-thalia-en` (default) - Clear, Confident, Energetic
+- `aura-2-cora-en` - Smooth, Melodic, Caring
+- `aura-2-luna-en` - Friendly, Natural, Engaging
+- And 35+ other voices...
 
 ## Performance Comparison
 

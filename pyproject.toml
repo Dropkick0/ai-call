@@ -52,7 +52,6 @@ google-auth-httplib2 = "0.2.0"
 guardrails-ai = "0.6.6"
 SQLAlchemy = "2.0.30"
 sounddevice = "0.4.6"
-groq = "0.29.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -120,7 +120,7 @@ def get_todays_free_slots():
             CURRENT_METRICS["calendar_errors"] += 1
         return []
     return [f"{s[0].strftime('%I:%M %p')} - {s[1].strftime('%I:%M %p')}" for s in slots]
-VOICE = "Cheyenne-PlayAI"
+VOICE = "shimmer"
 LOG_EVENT_TYPES = [
     "response.content.done",
     "rate_limits.updated",
